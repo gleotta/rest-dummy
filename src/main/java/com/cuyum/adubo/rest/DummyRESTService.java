@@ -16,12 +16,12 @@
  */
 package com.cuyum.adubo.rest;
 
+import java.util.List;
+import java.util.Set;
 import java.util.logging.Logger;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -29,7 +29,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 /**
  * JAX-RS Example
@@ -44,22 +44,28 @@ public class DummyRESTService {
     private Logger log;
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response get(@Context HttpServletRequest request,@Context HttpServletResponse response) {
+    @Produces(MediaType.TEXT_PLAIN)
+    public String get(@Context UriInfo request) {
+    	log.info("Ser recibe por GET los siguientes parametros: ");
     	
-    	log.info("Ser recibe por GET los siguientes parametros: "+request.getParameterMap().toString());
+    	Set<String> keys = request.getQueryParameters().keySet();
+    	for (String key : keys) {
+    		log.info(key+":"+request.getQueryParameters().getFirst(key));
+        	
+		}
     	
-        return  Response.ok().build();
+    	
+        return  "ok";
     }
 
     @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response post(String body) {
+    @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.TEXT_PLAIN)
+    public String post(String body) {
 
         log.info("Se recibe por POST el siguiente body: "+body);
 
-        return Response.ok().build();
+        return  "ok";
     }
 
 }
