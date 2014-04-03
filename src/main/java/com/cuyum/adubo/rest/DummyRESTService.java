@@ -54,7 +54,7 @@ public class DummyRESTService {
     		log.info(key+":"+request.getQueryParameters().getFirst(key));
         	
 		}
-    	if(idSolicitud==null){
+    	if(idSolicitud==null || idSolicitud.isEmpty()){
     		return "nook";
     	}
     	
