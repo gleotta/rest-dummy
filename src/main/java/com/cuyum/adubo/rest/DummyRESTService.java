@@ -16,7 +16,7 @@
  */
 package com.cuyum.adubo.rest;
 
-import java.util.List;
+import java.util.Random;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -27,6 +27,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
@@ -45,15 +46,17 @@ public class DummyRESTService {
 
     @GET
     @Produces(MediaType.TEXT_PLAIN)
-    public String get(@Context UriInfo request) {
-    	log.info("Ser recibe por GET los siguientes parametros: ");
+    public String get(@QueryParam("idSolicitud") String idSolicitud, @Context UriInfo request) {
+    	log.info("Se recibe por GET los siguientes parametros: ");
     	
     	Set<String> keys = request.getQueryParameters().keySet();
     	for (String key : keys) {
     		log.info(key+":"+request.getQueryParameters().getFirst(key));
         	
 		}
-    	
+    	if(idSolicitud==null){
+    		return "nook";
+    	}
     	
         return  "ok";
     }
@@ -68,4 +71,29 @@ public class DummyRESTService {
         return  "ok";
     }
 
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/date")
+    public String date(@Context UriInfo request) {
+	log.info("Se recibe por GET los siguientes parametros: ");
+        Set<String> keys = request.getQueryParameters().keySet();
+        for (String key : keys) {
+            log.info(key+":"+request.getQueryParameters().getFirst(key));
+        }
+        return "10";
+    }
+
+    @GET
+    @Produces(MediaType.TEXT_PLAIN)
+    @Path("/date/random")
+    public String dateRandom(@Context UriInfo request) {
+        log.info("Se recibe por GET los siguientes parametros: ");
+        Set<String> keys = request.getQueryParameters().keySet();
+        for (String key : keys) {
+            log.info(key+":"+request.getQueryParameters().getFirst(key));
+        }
+        Random r = new Random();
+        int a = r.nextInt(10) + 5;
+        return "" + a;
+    }
 }
