@@ -58,8 +58,8 @@
         <version.war.plugin>2.1.1</version.war.plugin>
 
         <!-- maven-compiler-plugin -->
-        <maven.compiler.target>1.6</maven.compiler.target>
-        <maven.compiler.source>1.6</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+        <maven.compiler.source>1.7</maven.compiler.source>
     </properties>
 
 
@@ -80,6 +80,15 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            
+              <dependency>
+				  <groupId>org.jbpm</groupId>
+				  <artifactId>jbpm-bom</artifactId>
+				  <version>6.0.1.Final</version>
+				  <scope>import</scope>
+				  <type>pom</type>
+		      </dependency>
+            
         </dependencies>
     </dependencyManagement>
 
@@ -114,11 +123,11 @@
 
         <!-- Import the JPA API, we use provided scope as the API is included in 
             JBoss AS 7 -->
-        <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.0-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>org.hibernate.javax.persistence</groupId> -->
+<!--             <artifactId>hibernate-jpa-2.0-api</artifactId> -->
+<!--             <scope>provided</scope> -->
+<!--         </dependency> -->
 
         <!-- Import the EJB API, we use provided scope as the API is included in 
             JBoss AS 7 -->
@@ -131,17 +140,17 @@
         <!-- JSR-303 (Bean Validation) Implementation -->
         <!-- Provides portable constraints such as @Email -->
         <!-- Hibernate Validator is shipped in JBoss AS 7 -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator</artifactId>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.slf4j</groupId>
-                    <artifactId>slf4j-api</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>org.hibernate</groupId> -->
+<!--             <artifactId>hibernate-validator</artifactId> -->
+<!--             <scope>provided</scope> -->
+<!--             <exclusions> -->
+<!--                 <exclusion> -->
+<!--                     <groupId>org.slf4j</groupId> -->
+<!--                     <artifactId>slf4j-api</artifactId> -->
+<!--                 </exclusion> -->
+<!--             </exclusions> -->
+<!--         </dependency> -->
 
         <!-- Import the JSF API, we use provided scope as the API is included in 
             JBoss AS 7 -->
@@ -155,19 +164,19 @@
 
         <!-- Annotation processor to generate the JPA 2.0 metamodel classes for 
             typesafe criteria queries -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-jpamodelgen</artifactId>
-            <scope>provided</scope>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>org.hibernate</groupId> -->
+<!--             <artifactId>hibernate-jpamodelgen</artifactId> -->
+<!--             <scope>provided</scope> -->
+<!--         </dependency> -->
 
         <!-- Annotation processor that raising compilation errors whenever constraint 
             annotations are incorrectly used. -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-validator-annotation-processor</artifactId>
-            <scope>provided</scope>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>org.hibernate</groupId> -->
+<!--             <artifactId>hibernate-validator-annotation-processor</artifactId> -->
+<!--             <scope>provided</scope> -->
+<!--         </dependency> -->
 
         <!-- Needed for running tests (you may also use TestNG) -->
         		<dependency>
@@ -180,17 +189,17 @@
         <!-- Optional, but highly recommended -->
         <!-- Arquillian allows you to test enterprise code such as EJBs and Transactional(JTA) 
             JPA from JUnit/TestNG -->
-        <dependency>
-            <groupId>org.jboss.arquillian.junit</groupId>
-            <artifactId>arquillian-junit-container</artifactId>
-            <scope>test</scope>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>org.jboss.arquillian.junit</groupId> -->
+<!--             <artifactId>arquillian-junit-container</artifactId> -->
+<!--             <scope>test</scope> -->
+<!--         </dependency> -->
 
-        <dependency>
-            <groupId>org.jboss.arquillian.protocol</groupId>
-            <artifactId>arquillian-protocol-servlet</artifactId>
-            <scope>test</scope>
-        </dependency>
+<!--         <dependency> -->
+<!--             <groupId>org.jboss.arquillian.protocol</groupId> -->
+<!--             <artifactId>arquillian-protocol-servlet</artifactId> -->
+<!--             <scope>test</scope> -->
+<!--         </dependency> -->
         
         <!-- Resteasy -->
 		<dependency>
@@ -214,13 +223,10 @@
 		<dependency>
 			<groupId>org.kie.remote</groupId>
 			<artifactId>kie-services-remote</artifactId>
-			<version>6.0.1.Final</version>
 		</dependency>
-		
 		<dependency>
 			<groupId>org.kie.remote</groupId>
 			<artifactId>kie-services-client</artifactId>
-			<version>6.0.1.Final</version>
 		</dependency>
 		
 		<dependency>
@@ -233,9 +239,38 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 		</dependency>
-
+		
+		<!-- can compile, but cannot deploy without these seam dependencies -->
+	    <dependency>
+		    <groupId>org.jboss.seam.persistence</groupId>
+		    <artifactId>seam-persistence</artifactId>
+		    <version>3.1.0.Final</version>
+	    </dependency>
+	    <dependency>
+		    <groupId>org.jboss.seam.transaction</groupId>
+		    <artifactId>seam-transaction</artifactId>
+		    <version>3.1.0.Final</version>
+	    </dependency>
     </dependencies>
-
+    
+	<repositories>
+		<repository>
+			<id>jboss-public-repository-group</id>
+			<name>JBoss Public Maven Repository Group</name>
+			<url>https://repository.jboss.org/nexus/content/groups/public-jboss/</url>
+			<layout>default</layout>
+			<releases>
+				<enabled>true</enabled>
+				<updatePolicy>never</updatePolicy>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+				<updatePolicy>daily</updatePolicy>
+			</snapshots>
+		</repository>
+	</repositories>
+    
+    
     <build>
         <!-- Maven will append the version to the finalName (which is the name 
             given to the generated war, and hence the context root) -->
@@ -281,9 +316,5 @@
                 </plugins>
             </build>
         </profile>
-
-
-
-
-    </profiles>
+    </profiles>    
 </project>

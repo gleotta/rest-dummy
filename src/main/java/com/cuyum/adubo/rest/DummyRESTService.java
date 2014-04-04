@@ -18,7 +18,6 @@ package com.cuyum.adubo.rest;
 
 import java.util.Random;
 import java.util.Set;
-import java.util.logging.Logger;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -31,6 +30,8 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
+
+import org.apache.log4j.Logger;
 
 /**
  * JAX-RS Example

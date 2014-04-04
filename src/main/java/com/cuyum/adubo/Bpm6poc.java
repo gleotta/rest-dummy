@@ -12,16 +12,14 @@ import org.kie.api.runtime.KieSession;
 import org.kie.api.runtime.manager.RuntimeEngine;
 import org.kie.api.runtime.process.ProcessInstance;
 import org.kie.api.task.TaskService;
-import org.kie.api.task.model.Status;
 import org.kie.api.task.model.Task;
 import org.kie.api.task.model.TaskSummary;
-import org.kie.services.client.api.RemoteRestRuntimeFactory;
 import org.kie.services.client.api.command.RemoteConfiguration;
 import org.kie.services.client.api.command.RemoteRuntimeEngine;
 
 public class Bpm6poc {
 
-	protected static Logger logger = Logger.getLogger(Bpm6poc.class);
+    private static Logger log = Logger.getLogger(Bpm6poc.class);
 
 	public static void main(String[] args){
 		URL url = null;
@@ -29,7 +27,7 @@ public class Bpm6poc {
 			// creamos la conexion al servidor bmp6 de cuyum
 			url = new URL("http://162.243.12.101:8080/business-central/");
 		} catch (MalformedURLException e) {
-			logger.error("La URL suministrada es incorrecta!",e);
+			log.error("La URL suministrada es incorrecta!",e);
 		}
 		
 		/*--------------------------------------------*/
